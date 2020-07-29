@@ -1,0 +1,3 @@
+api.stldata.org {
+    reverse_proxy /crime crime-api:3000
+}
