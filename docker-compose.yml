@@ -10,7 +10,7 @@ services:
         volumes: 
             - ./index.html:/usr/share/caddy/index.html
             - ./Caddyfile:/etc/caddy/Caddyfile
-            - caddy_data:/data
+            - ./caddy_data:/data
     crime-api:
         container_name: crime-api
         image: docker.pkg.github.com/stlrda/crime-api/api:latest
