@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Comfortaa', cursive;
+    font-weight: 300;
+    font-size: 12px;
+}
+
+/* RDA Brand Colors */
+:root {
+    --dark-blue: #1B365D;
+    --light-blue: #5CB8B2;
+    --green: #ADCB00;
+    --red: #E1523D;
+    --orange: #f68d2e;
+    --gray: #898d8d;
+    --white: #ffffff;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.title {
+    height: 30px;
+    background-color: var(--red);
+    color: var(--white);
+    padding: 10px;
+    border-bottom: 1px solid var(--orange);
+}
+h1 {
+    font-size: 2rem;
+}
+p {
+    font-size: 1.25rem;
+}
+
+.hero {
+    width: 100%;
+}
+
+.hero img {
+    width: 40%;
+    margin-left: 30%;
+}
+
+.desc {
+    padding: 20px;
+    background-color: var(--green);
+    border-top: 1px solid var(--gray);
+    border-bottom: 1px solid var(--gray);
+}
+
+.projects {
+    padding: 15px;
+}
+
+.projects h3 a{
+    font-size: 1.5rem;
+}
+
+.projects .alt {
+    margin-top: 20px;
+}
+
+/* Media Queries */
+@media screen and (max-width:500px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+    .hero img {
+        width: 60%;
+        margin-left: 20%;
+    }
+}

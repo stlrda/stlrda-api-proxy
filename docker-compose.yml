@@ -8,7 +8,7 @@ services:
             - 80:80
             - 443:443
         volumes: 
-            - ./index.html:/usr/share/caddy/index.html
+            - ./static:/usr/share/caddy
             - ./Caddyfile:/etc/caddy/Caddyfile
             - ./caddy_data:/data
     crime-api:
