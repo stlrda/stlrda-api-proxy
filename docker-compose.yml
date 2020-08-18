@@ -11,6 +11,14 @@ services:
             - ./static:/usr/share/caddy
             - ./Caddyfile:/etc/caddy/Caddyfile
             - ./caddy_data:/data
+    watchtower:
+        container_name: watchtower
+        image: v2tec/watchtower
+        restart: always
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /home/ubuntu/.docker/config.json:/config.json
+        command: watchtower crime-api redb-api --interval 120
     crime-api:
         container_name: crime-api
         image: docker.pkg.github.com/stlrda/crime-api/crime-api:latest
