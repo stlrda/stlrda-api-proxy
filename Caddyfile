@@ -5,6 +5,7 @@
 api.stldata.org {
     reverse_proxy /crime* crime-api:3000
     reverse_proxy /redb* redb-api:3001
+    reverse_proxy /social* social-api:3002
     root * /usr/share/caddy/
     file_server
 }

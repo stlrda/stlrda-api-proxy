@@ -18,7 +18,7 @@ services:
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - /home/ubuntu/.docker/config.json:/config.json
-        command: watchtower crime-api redb-api --interval 120
+        command: watchtower crime-api redb-api social-api --interval 120
     crime-api:
         container_name: crime-api
         image: docker.pkg.github.com/stlrda/crime-api/crime-api:latest
@@ -47,3 +47,17 @@ services:
             - DB_PASS=postgres
             - DB_PORT=5432
             - DB_NAME=redb
+    social-api:
+        container_name: social-api
+        image: docker.pkg.github.com/stlrda/social-api/social-api:latest
+        restart: always
+        depends_on:
+            - caddy
+        ports:
+            - 3002:3002
+        environment:
+            - DB_HOST=localhost
+            - DB_USER=postgres
+            - DB_PASS=postgres
+            - DB_PORT=5432
+            - DB_NAME=uw211dashboard
