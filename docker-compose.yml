@@ -63,7 +63,7 @@ services:
             - DB_NAME=uw211dashboard
     vcpp-api:
         container_name: vcpp-api
-        image: docker.pkg.github.com/stlrda/vc_parcel_project/vcpp-scraper:latest
+        image: docker.pkg.github.com/stlrda/vc_parcel_project/vcpp-api:latest
         restart: always
         depends_on:
             - caddy
