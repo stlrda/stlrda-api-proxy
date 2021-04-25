@@ -61,3 +61,18 @@ services:
             - DB_PASS=postgres
             - DB_PORT=5432
             - DB_NAME=uw211dashboard
+    vcpp-api:
+        container_name: vcpp-api
+        image: docker.pkg.github.com/stlrda/vc_parcel_project/vcpp-scraper:latest
+        restart: always
+        depends_on:
+            - caddy
+        ports:
+            - 4001:4001
+        environment:
+            - DB_HOST=localhost
+            - DB_USER=postgres
+            - DB_PASS=postgres
+            - DB_PORT=5432
+            - DB_NAME=redb
+            - API_KEY=itsasecret
