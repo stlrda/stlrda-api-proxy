@@ -18,7 +18,7 @@ services:
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - /home/ubuntu/.docker/config.json:/config.json
-        command: watchtower crime-api redb-api social-api vcpp-api --interval 120
+        command: watchtower crime-api redb-api vcpp-scraper --interval 120
     crime-api:
         container_name: crime-api
         image: docker.pkg.github.com/stlrda/crime-api/crime-api:latest
@@ -47,32 +47,11 @@ services:
             - DB_PASS=postgres
             - DB_PORT=5432
             - DB_NAME=redb
-    social-api:
-        container_name: social-api
-        image: docker.pkg.github.com/stlrda/social-api/social-api:latest
-        restart: always
-        depends_on:
-            - caddy
-        ports:
-            - 3002:3002
-        environment:
-            - DB_HOST=localhost
-            - DB_USER=postgres
-            - DB_PASS=postgres
-            - DB_PORT=5432
-            - DB_NAME=uw211dashboard
-    vcpp-api:
-        container_name: vcpp-api
-        image: docker.pkg.github.com/stlrda/vc_parcel_project/vcpp-api:latest
-        restart: always
-        depends_on:
-            - caddy
-        ports:
-            - 4001:4001
-        environment:
-            - DB_HOST=localhost
-            - DB_USER=postgres
-            - DB_PASS=postgres
-            - DB_PORT=5432
-            - DB_NAME=redb
-            - API_KEY=itsasecret
+   vcpp-scraper:
+       container_name: vcpp_scraper
+       image: docker.pkg.github.com/stlrda/vc_parcel_project/vcpp-scraper:latest
+       restart: always
+       environment:
+           - DB_HOST=localhost
+           - DB_PASS=postgres
+           - API_KEY=secret
