@@ -1,7 +1,7 @@
 version: "3.3"
 services:
     caddy:
-        container_name: caddy-server
+        container_name: caddy
         image: caddy:2.0.0-alpine
         restart: always
         ports:
@@ -18,7 +18,7 @@ services:
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - /home/ubuntu/.docker/config.json:/config.json
-        command: watchtower crime-api redb-api vcpp-scraper --interval 120
+        command: watchtower crime-api vcpp-scraper vcpp-api --interval 120
     crime-api:
         container_name: crime-api
         image: docker.pkg.github.com/stlrda/crime-api/crime-api:latest
@@ -28,30 +28,27 @@ services:
         ports: 
             - 3000:3000
         environment:
-            - DB_HOST=localhost
-            - DB_USER=postgres
-            - DB_PASS=postgres
+            - DB_HOST=$CRIME_DB_HOST
+            - DB_USER=$CRIME_DB_USER
+            - DB_PASS=$CRIME_DB_PASS
             - DB_PORT=5432
             - DB_NAME=crime
-    redb-api:
-        container_name: redb-api
-        image: docker.pkg.github.com/stlrda/redb-api/redb-api:latest
+   vcpp-scraper:
+       container_name: vcpp-scraper
+       image: docker.pkg.github.com/stlrda/vc_parcel_project/vcpp-scraper:latest
+       restart: always
+       environment:
+           - DB_HOST=$VCPP_DB_HOST
+           - DB_PASS=$VCPP_DB_PASS
+           - API_KEY=$VCPP_API_KEY
+    vcpp-api:
+        container_name: vcpp-api
+        image: docker.pkg.github.com/stlrda/vc_parcel_project/vcpp-api:latest
         restart: always
         depends_on:
             - caddy
         ports: 
-            - 3001:3001
+            - 4001:4001
         environment:
-            - DB_HOST=localhost
-            - DB_USER=postgres
-            - DB_PASS=postgres
-            - DB_PORT=5432
-            - DB_NAME=redb
-   vcpp-scraper:
-       container_name: vcpp_scraper
-       image: docker.pkg.github.com/stlrda/vc_parcel_project/vcpp-scraper:latest
-       restart: always
-       environment:
-           - DB_HOST=localhost
-           - DB_PASS=postgres
-           - API_KEY=secret
+            - DB_HOST=$VCPP_DB_HOST
+            - DB_PASS=$VCPP_DB_PASS
